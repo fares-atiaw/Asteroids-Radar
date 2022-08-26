@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="data"
+            type="com.udacity.asteroidradar.models.Asteroid" />
+        <variable
+            name="action"
+            type="com.udacity.asteroidradar.screens.main.RV_Adapter.AsteroidListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/smallest_offset"
+        android:onClick="@{()-> action.onClick(data)}"
+        android:background="@color/app_background">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_codeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.codename}"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:contentDescription="@{data.codename}"/>
+
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.closeApproachDate}"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:contentDescription="@{data.closeApproachDate}"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:statusIcon="@{data.potentiallyHazardous}"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="@dimen/smallest_offset"
+            app:setIconDescription="@{data.potentiallyHazardous}"
+            tools:srcCompat="@drawable/ic_status_normal"
+            />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
