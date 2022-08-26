@@ -13,7 +13,6 @@ class VM_Main(application: Application) : AndroidViewModel(application) {
 
     var repository = Repository(AsteroidDatabase.getInstance(application.baseContext))
 
-//    val asteroid_data : LiveData<List<Asteroid>?> = repository.asteroid_allList
     val asteroid_data : LiveData<List<Asteroid>?> = repository.mediatorList
 
     private var _asteroid_picture = MutableLiveData<PictureOfDay?>()

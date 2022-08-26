@@ -12,13 +12,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
-class Repository(private val database: AsteroidDatabase) {          // Q: why don't I make it in the init{}, so that "I will get the data just from Repository" ????
+class Repository(private val database: AsteroidDatabase) {
 
-    /** A playlist that can be shown on the screen. */
     val asteroid_allList: LiveData<List<Asteroid>?> = database.AsteroidDatabaseDao.getAllSavedAsteroids()
-    val asteroid_todayList: LiveData<List<Asteroid>?> = database.AsteroidDatabaseDao.getTodayAsteroids(CustomCalender().getDay())           // Here ya Bashmohandes
+    val asteroid_todayList: LiveData<List<Asteroid>?> = database.AsteroidDatabaseDao.getTodayAsteroids(CustomCalender().getDay())
     val asteroid_weekList: LiveData<List<Asteroid>?> = database.AsteroidDatabaseDao.getWeekAsteroids(CustomCalender().getDay(), CustomCalender().getSeventhDay())
 
+    /** A playlist that can be shown on the screen. */
     val mediatorList = MediatorLiveData<List<Asteroid>?>()
 
     init {

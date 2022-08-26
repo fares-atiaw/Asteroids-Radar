@@ -64,17 +64,19 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 }
 
 @BindingAdapter("listData")								/**  COOL  **/
-fun bindList(rv : RecyclerView, data : List<Asteroid>?)
-{
+fun bindList(rv : RecyclerView, data : List<Asteroid>?) {
+// Here, recyclerview's adapter just acting as an Adapter-Class to submit the given data. So, you need to attach an Adapter-Class to it later.
     data?.let {
         val myAdapter = rv.adapter as RV_Adapter
-        myAdapter.submitList(data)
+        myAdapter.submitList(data){
+            rv.scrollToPosition(0)      // scroll the list to the top after the diffs are calculated and posted
+        }
     }
-//    rv.adapter = myAdapter // nope
+//    Then in the related activity/fragment, assign/attach the adapter into the binding.recyclerview
 }
 
 @BindingAdapter("imageUrl")
-fun bindImage(imageView : ImageView, imageUrl :String?)             //  check the type ????
+fun bindImage(imageView : ImageView, imageUrl :String?)
 {
     imageUrl?.let {
         val image = it.toUri().buildUpon().scheme("https").build()
@@ -83,7 +85,7 @@ fun bindImage(imageView : ImageView, imageUrl :String?)             //  check th
             .placeholder(R.drawable.loading_animation)
             .error(R.drawable.ic_broken_image)
             .into(imageView)
-
+    }
         /*
         Glide.with(imageView.context)
             .load(image)
@@ -111,6 +113,6 @@ fun bindImage(imageView : ImageView, imageUrl :String?)             //  check th
         @GlideModule
         class MyGlideApp : AppGlideModule()*/
 
-    }
+
 }
 
