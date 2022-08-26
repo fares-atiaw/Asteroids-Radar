@@ -1,1 +1,1 @@
-Use the NASA API to detect nearby asteroids.
+Use the NASA api to detect nearby asteroids.
