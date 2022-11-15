@@ -5,6 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 //https://api.nasa.gov/planetary/apod?api_key=YOUR_API_KEY
 //https://api.nasa.gov/neo/rest/v1/feed?start_date=START_DATE&end_date=END_DATE&api_key=YOUR_API_KEY
@@ -24,6 +25,12 @@ const val api_key = "DEMO_KEY"
     interface EndPoints {
         @GET("neo/rest/v1/feed?api_key=${api_key}")
         suspend fun getAsteroids(): String
+
+        @GET("neo/rest/v1/feed?api_key=${api_key}")
+        suspend fun getNextAsteroids(
+            @Query("start_date") start_date: String,
+            @Query("end_date") end_date: String
+        ): String
 
         @GET("planetary/apod?api_key=${api_key}")
         suspend fun getDayPicture(): PictureOfDay?

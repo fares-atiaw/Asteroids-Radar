@@ -40,32 +40,39 @@ class MainFragment : Fragment() {
             }
         })
 
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        /**Menu Setup**/
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_overflow_menu, menu)
+            }
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.show_week_menu -> {
+                        viewModel.weekSelected()
+                        true
+                    }
+                    R.id.show_today_menu -> {
+                        viewModel.todaySelected()
+                        true
+                    }
+                    R.id.show_save_menu -> {
+                        viewModel.allSelected()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.show_week_menu -> {
-                viewModel.weekSelected()
-                true
-            }
-            R.id.show_today_menu -> {
-                viewModel.todaySelected()
-                true
-            }
-            R.id.show_save_menu -> {
-                viewModel.allSelected()
-                true
-            }
-            else -> false
-        }
-    }
 
     /*class ExampleFragment : Fragment(R.layout.fragment_detail) {
 

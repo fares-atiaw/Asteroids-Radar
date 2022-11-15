@@ -38,7 +38,8 @@ class Repository(private val database: AsteroidDatabase) {
 
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
-            val playlist = Network.service.getAsteroids()
+//            val playlist = Network.service.getAsteroids()
+            val playlist = Network.service.getNextAsteroids(CustomCalender().getDay(), CustomCalender().getSeventhDay())
             val x = JSONObject(playlist)
             val lastData = parseAsteroidsJsonResult(x).toTypedArray()
             database.AsteroidDatabaseDao.insertAll(*lastData)

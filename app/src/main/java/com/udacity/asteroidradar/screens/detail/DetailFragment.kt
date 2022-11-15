@@ -13,8 +13,6 @@ import com.udacity.asteroidradar.databinding.FragmentDetailBinding
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 import com.udacity.asteroidradar.screens.main.VM_Main
 
-
-
 class DetailFragment : Fragment() {
 
     lateinit var binding : FragmentDetailBinding
